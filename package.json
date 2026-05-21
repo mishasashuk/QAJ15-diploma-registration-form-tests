@@ -1,0 +1,18 @@
+{
+  "name": "qaj15-diploma-registration-form-tests",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "mishasashuk@gmail.com",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --config mocha/config/.mocharc"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.9.1",
+    "mocha": "^11.7.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
