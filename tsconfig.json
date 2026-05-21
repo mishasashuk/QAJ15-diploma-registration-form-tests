@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "lib": ["ESNext", "dom"],
     "rootDir": "./",
-    "types": ["node", "mocha"]
+    "types": ["node", "mocha", "chai"]
   },
   "ts-node": {
     "esm": true,
