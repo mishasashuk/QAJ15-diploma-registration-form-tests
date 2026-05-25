@@ -21,12 +21,7 @@ describe('RegistrationForm Positive Tests', () => {
   });
 
   it('should validate matching passwords', () => {
-    expect(
-      form.validateConfirmPassword(
-        'Password1',
-        'Password1'
-      )
-    ).to.be.true;
+    expect(form.validateConfirmPassword('Password1', 'Password1')).to.be.true;
   });
 
   it('should validate correct phone number', () => {
@@ -50,7 +45,7 @@ describe('RegistrationForm Positive Tests', () => {
       confirmPassword: 'Password1',
       phone: '+12345678901',
       age: 30,
-      termsAccepted: true
+      termsAccepted: true,
     });
 
     expect(result).to.be.true;
@@ -78,5 +73,80 @@ describe('RegistrationForm Positive Tests', () => {
 
   it('should validate password with multiple numbers', () => {
     expect(form.validatePassword('StrongPass123')).to.be.true;
+  });
+});
+
+describe('RegistrationForm Negative Tests', () => {
+  const form = new RegistrationForm();
+
+  it('should not validate empty first name', () => {
+    expect(form.validateFirstName('')).to.be.false;
+  });
+
+  it('should not validate too short first name', () => {
+    expect(form.validateFirstName('J')).to.be.false;
+  });
+
+  it('should not validate first name with numbers', () => {
+    expect(form.validateFirstName('John1')).to.be.false;
+  });
+
+  it('should not validate empty last name', () => {
+    expect(form.validateLastName('')).to.be.false;
+  });
+
+  it('should not validate last name with special characters', () => {
+    expect(form.validateLastName('Smith!')).to.be.false;
+  });
+
+  it('should not validate email without at symbol', () => {
+    expect(form.validateEmail('testgmail.com')).to.be.false;
+  });
+
+  it('should not validate email without domain', () => {
+    expect(form.validateEmail('test@')).to.be.false;
+  });
+
+  it('should not validate short password', () => {
+    expect(form.validatePassword('Pass1')).to.be.false;
+  });
+
+  it('should not validate password without uppercase letter', () => {
+    expect(form.validatePassword('password1')).to.be.false;
+  });
+
+  it('should not validate password without number', () => {
+    expect(form.validatePassword('Password')).to.be.false;
+  });
+
+  it('should not validate different passwords', () => {
+    expect(form.validateConfirmPassword('Password1', 'Password2')).to.be.false;
+  });
+
+  it('should not validate phone with letters', () => {
+    expect(form.validatePhone('+123abc7890')).to.be.false;
+  });
+
+  it('should not validate age under 18', () => {
+    expect(form.validateAge(17)).to.be.false;
+  });
+
+  it('should not validate age over 100', () => {
+    expect(form.validateAge(101)).to.be.false;
+  });
+
+  it('should not validate form without accepted terms', () => {
+    const result = form.validateForm({
+      firstName: 'John',
+      lastName: 'Smith',
+      email: 'john@gmail.com',
+      password: 'Password1',
+      confirmPassword: 'Password1',
+      phone: '+12345678901',
+      age: 30,
+      termsAccepted: false,
+    });
+
+    expect(result).to.be.false;
   });
 });
