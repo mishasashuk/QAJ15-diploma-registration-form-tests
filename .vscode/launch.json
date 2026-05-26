@@ -5,7 +5,7 @@
       "type": "node-terminal",
       "request": "launch",
       "name": "diploma debugger",
-      "command": "npm run test:API"
+      "command": "npm run test"
     }
   ]
 }
